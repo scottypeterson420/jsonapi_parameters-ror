@@ -168,7 +168,7 @@ describe AuthorsController, type: :controller do
         ]
       }
 
-      post :create, params: params
+      post_with_rails_fix :create, params: params
 
       author_id = jsonapi_response[:data][:id]
       post_id = jsonapi_response[:data][:relationships][:posts][:data].first[:id]
@@ -214,7 +214,7 @@ describe AuthorsController, type: :controller do
         ]
       }
 
-      patch :update, params: params, as: :json
+      patch_with_rails_fix :update, params: params, as: :json
 
       expect(Post.first.title).to eq('Updated title')
       expect(Post.first.body).to eq('Updated body')
